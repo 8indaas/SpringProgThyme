@@ -1,32 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<c:set var="cp" value="${pageContext.request.servletContext.contextPath}" scope="request"> </c:set>
-	
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-
-<script src="${cp}/resources/js/jquery.js"></script>
-<script src="${cp}/resources/js/jquery.dataTables.min.js"></script>
-
-<!-- <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script> -->
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#table_id').dataTable({
-			"bProcessing" : true,
-			"sAjaxSource" : '../examples_support/json_source.txt'
-		});
-	});
-</script>
-</head>
-<body>
+<t:wrapper>
 	<h3>jquery datatable sample</h3>
+	<h4>Persons count: ${fn:length(persons)}</h4>
 	<table id="table_id">
 		<thead>
 			<tr>
@@ -36,17 +15,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Row 1 Data 1</td>
-				<td>Row 1 Data 2</td>
-				<td>etc</td>
-			</tr>
-			<tr>
-				<td>Row 2 Data 1</td>
-				<td>Row 2 Data 2</td>
-				<td>etc</td>
-			</tr>
+			<c:forEach items="${persons}" var="person" varStatus="status">
+				<tr>
+					<td>${person.id}</td>
+					<td>${person.name}</td>
+					<td>${person.location}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
-</body>
-</html>
+
+	<script src="${cp}/resources/js/jquery.js"></script>
+	<script src="${cp}/resources/js/jquery.dataTables.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#table_id').dataTable();
+		});
+	</script>
+</t:wrapper>

@@ -1,6 +1,5 @@
 package com.upkar.example.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +17,12 @@ public class PersonController {
 	
 	@RequestMapping("person")
 	public Person getPersonDetail(@RequestParam(value="id", required=false, defaultValue="0") Integer id){
-		Person p = service.getPersonDetail(id);
+		Person p = service.generatePerson(id);
 		return p;
 	}
 	
 	@RequestMapping("persons")
 	public List<Person> getAllPersons(){
-		
-		List<Person> personList = new ArrayList<Person>();
-		for(int i = 0; i< 100; i++){
-			Person p = service.getPersonDetail(i);
-			personList.add(p);
-		}
-		return personList;
+		return service.generatePersons(100);
 	}
 }
