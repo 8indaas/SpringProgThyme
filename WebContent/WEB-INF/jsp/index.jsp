@@ -1,9 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:wrapper>
+	<h2><spring:message code="radioBtnOptYes" text="yes?" /></h2>
 	<h3>jquery datatable sample</h3>
 	<h4>Persons count: ${fn:length(persons)}</h4>
 	<table id="table_id">
